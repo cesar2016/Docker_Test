@@ -1,5 +1,12 @@
 # 🚀 CRUD con Docker Compose: React, Laravel, MySQL, Nginx & PhpMyAdmin
 
+<div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;">
+  <img src="https://chuda.me/wp-content/uploads/2022/09/lampp.jpg" alt="LAMPP" width="200" style="margin: 5px;">
+  <img src="https://miro.medium.com/v2/resize:fit:522/0*Hdm7hBTZ-hKlbtlV.png" alt="Node.js" width="200" style="margin: 5px;">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnhfAMgG_6ps9Hs_2NjmJ5pgskwlhFAQyv7g&s" alt="React" width="200" style="margin: 5px;">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJl4fp0SkQbTPU5ZxVl6AKWYuKCwM0gIhNtQ&s" alt="Laravel" width="200" style="margin: 5px;">
+</div>
+
 Bienvenido a este proyecto, cuyo objetivo principal no es la complejidad del código, sino la **demostración de la facilidad y potencia de la tecnología de contenedores con Docker**.
 
 Este repositorio te permitirá levantar un entorno de desarrollo completo y funcional con una aplicación CRUD (Crear, Leer, Actualizar, Borrar) en pocos pasos, sin preocuparte por la instalación de dependencias o conflictos de versiones en tu máquina local.
@@ -72,5 +79,7 @@ Una vez que los contenedores estén operativos, podrás acceder a los diferentes
 
 ---
 
-## 🛑 Detener y Limpiar el Entorno
+## AUTOR
+- cesars.pro@gmail.com
+- Linkedin: https://www.linkedin.com/in/cesar-sanchez-dev/
 
