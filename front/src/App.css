@@ -1,0 +1,21 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.App {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+h1, h2 {
+  color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

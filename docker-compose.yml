@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: test_dkr_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_dkr
+      MYSQL_USER: test_dkr_db
+      MYSQL_PASSWORD: test_dkr_db1234
+    volumes:
+     - ./data/pg_data:/var/lib/mysql
+     - ./init_db:/docker-entrypoint-initdb.d/
+    ports:
+     - 3308:3306
+    healthcheck:
+     test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+     interval: 10s
+     timeout: 5s
+     retries: 5
+    networks:
+    - test_dkr_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: test_dkr_phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - "9500:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+        - test_dkr_network
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: test_dkr_front
+    working_dir: /app
+    command: "npm run start"
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    ports:
+      - 3002:3000
+    depends_on:
+      - db
+    networks:
+      - test_dkr_network
+
+  back:
+      build:
+        context: ./back
+        dockerfile: Dockerfile
+      container_name: test_dkr_back
+      working_dir: /var/www/html
+      volumes:
+        - ./back:/var/www/html
+      ports:
+        # Ahora, el puerto 9200 del host mapeará al puerto 80 del contenedor 'back',
+        # que es donde Nginx (dentro de 'back') estará escuchando.
+        - "9200:80"
+      environment:
+        APP_ENV: local
+        APP_DEBUG: "true"
+        DB_CONNECTION: mysql
+        DB_HOST: db
+        DB_PORT: 3306
+        DB_DATABASE: test_dkr
+        DB_USERNAME: test_dkr_db
+        DB_PASSWORD: test_dkr_db1234
+      depends_on:
+        db:
+          condition: service_healthy
+      # ¡CORREGIDO! Este comando ahora iniciará las migraciones, luego Nginx y finalmente PHP-FPM.
+      command: sh -c "composer install --no-dev --optimize-autoloader && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache && if [ ! -f .env ]; then cp .env.example .env; fi && php artisan key:generate && php artisan migrate --force && /usr/sbin/nginx -g 'daemon off;' & php-fpm -F"
+      networks:
+        - test_dkr_network
+   
+networks:
+  test_dkr_network:
+    driver: bridge

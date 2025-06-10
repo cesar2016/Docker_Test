@@ -1,0 +1,70 @@
+.client-form-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    text-align: left;
+
+    /* AÑADE ESTAS LÍNEAS PARA ACHICARLO Y CENTRARLO */
+    max-width: 500px; /* O el valor que prefieras, por ejemplo, 400px o 50% */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box; /* Asegura que padding y border se incluyan en el ancho */
+}
+
+/* El resto de tu CSS permanece igual */
+.client-form-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #0056b3;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+    width: calc(100% - 20px); /* Ajuste para padding */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin: 0 5px;
+    transition: background-color 0.2s ease;
+}
+
+.form-actions button:hover {
+    background-color: #218838;
+}
+
+.form-actions .cancel-btn {
+    background-color: #6c757d;
+}
+
+.form-actions .cancel-btn:hover {
+    background-color: #5a6268;
+}
